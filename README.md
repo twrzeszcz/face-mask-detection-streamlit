@@ -1,1 +1,11 @@
-# face-mask-streamlit
+# General Info 
+The goal of this project was to build a real time face mask detection app. For this purpose Tensorflow Object Detection API was used with a pretrained *MobileNetV2* model and the following dataset [kaggle](https://www.kaggle.com/andrewmvd/face-mask-detection). Training process was done on the Google Colab according to the [Medium](https://medium.com/swlh/tensorflow-2-object-detection-api-with-google-colab-b2af171e81cc) article. In the **face_mask_detection_inference** notebook one can load the model and make some predictions on an image or in real time on the webcam. Streamlit application is written in the **app** file and is deployed here [Streamlit Face Mask Detection](https://share.streamlit.io/twrzeszcz/face-mask-detection-streamlit/main/app.py).
+
+## app.py
+In this app I am using a *streamlit_webrtc* package which allows for easy stream from the webcam. To draw bounding boxes on every frame I had to copy some of the utility functions from the Tensorflow Object Detection API and store them in the *utils* file which is imported at the beginning. Below I will explain the app step by step.
+1. After importing stuff we have to update *ClientSettings* so that our stream only contains video and not the audio.
+2. Then we define a function which loads our model and use a *@st.cache* to cache the model after the model is loaded for the first time. Since this function is not changing, every rerun of the app does not omits this function.
+3. Then we have to define class which will make inference. We would like a user to be able to change the *confidence_threshold* of the detections and also the number of detected bounding boxes so these parameters are defined in the constructor. There is also a category index dictionary which is just the loaded *label_map* file but I did not want to copy more utility functions so it is hard coded.
+4. In the next step a prediction function is defined. Here we do the same steps as described in the notebook.
+5. The main function is the *recv* which converts every frame to numpy array and apply a *gen_pred* function on it. Then the result is returned as frame again.
+6. The last step is just the definition of 2 sliders which allows to control parameters mentioned above.
