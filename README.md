@@ -3,7 +3,7 @@ The goal of this project was to build a real time face mask detection app. For t
 
 ## app.py
 In this app I am using a *streamlit_webrtc* package which allows for easy stream from the webcam. To draw bounding boxes on every frame I had to copy some of the utility functions from the Tensorflow Object Detection API and store them in the *utils* file which is imported at the beginning. Below I will explain the app step by step.
-1. After importing stuff we have to update *ClientSettings* so that our stream only contains video and not the audio.
+1. After importing packages we have to update *ClientSettings* so that our stream only contains video and not the audio.
 2. Then we define a function which loads our model and use a *@st.cache* to cache the model after the model is loaded for the first time. Since this function is not changing, every rerun of the app does not omits this function.
 3. Then we have to define class which will make inference. We would like a user to be able to change the *confidence_threshold* of the detections and also the number of detected bounding boxes so these parameters are defined in the constructor. There is also a category index dictionary which is just the loaded *label_map* file but I did not want to copy more utility functions so it is hard coded.
 4. In the next step a prediction function is defined. Here we do the same steps as described in the notebook.
