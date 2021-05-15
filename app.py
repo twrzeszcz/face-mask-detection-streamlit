@@ -71,7 +71,7 @@ webrtc_ctx = webrtc_streamer(
 )
 
 confidence_threshold = st.slider('Confidence threshold', 0.0, 1.0, 0.5, 0.05)
-num_boxes = st.slider('Number of boxes', 1, 5, 1)
+num_boxes = st.slider('Number of boxes', 1, 20, 1)
 
 if webrtc_ctx.video_processor:
     webrtc_ctx.video_processor.confidence_threshold = confidence_threshold
