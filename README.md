@@ -1,1 +1,1 @@
-# face-mask-detection-streamlit
+# face-mask-streamlit
