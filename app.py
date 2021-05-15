@@ -63,7 +63,7 @@ class MaskDetector(VideoProcessorBase):
 
 
 webrtc_ctx = webrtc_streamer(
-    key="object-detection",
+    key="mask-detection",
     mode=WebRtcMode.SENDRECV,
     client_settings=WEBRTC_CLIENT_SETTINGS,
     video_processor_factory=MaskDetector,
